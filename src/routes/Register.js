@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Input } from 'antd'
-import { gql, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import { register } from '../graphql/user'
 
 class Register extends React.Component {
   state = {
@@ -39,12 +40,5 @@ class Register extends React.Component {
     )
   }
 }
-const mutation = gql`
-mutation ($username: String!) {
-  createUser (username: $username) {
-   id
-   username
-  }
-}`;
 
-export default graphql(mutation)(Register)
+export default graphql(register)(Register)
