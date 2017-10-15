@@ -8,6 +8,13 @@ query currentUser {
   }
 }
 `;
+export const allUsers = gql`
+query allUsers {
+    allUsers {
+      username
+    }
+  }
+`;
 
 export const register = gql`
 mutation register ($username: String!) {
