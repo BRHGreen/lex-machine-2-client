@@ -26,10 +26,17 @@ class Login extends React.Component {
       <div>
       <h1>Login</h1>
         <Input
-          name='username'
-          placeholder='username'
+          name='email'
+          placeholder='email'
           onChange={e => this.onChange(e)}
-          value={this.state.username}
+          value={this.state.email}
+          />
+        <Input
+          name='password'
+          placeholder='password'
+          type='password'
+          onChange={e => this.onChange(e)}
+          value={this.state.password}
           />
           <Button onClick={() => this.onSubmit()} type='primary'>Login</Button>
       </div>

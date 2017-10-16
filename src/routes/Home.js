@@ -1,7 +1,8 @@
 import React from 'react';
 import { Input } from 'antd';
 import { graphql } from 'react-apollo';
-import { allUsers } from '../graphql/user';
+import { allUsers, me } from '../graphql/user';
+
 
 class Home extends React.Component {
   state = {

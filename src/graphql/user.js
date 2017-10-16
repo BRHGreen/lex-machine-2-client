@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export const currentUser = gql`
 query currentUser {
-  getUser {
+  me {
     id
     username
   }
@@ -24,9 +24,6 @@ mutation register ($username: String!, $email: String!, $password: String!) {
   }
 }`;
 export const login = gql`
-mutation register ($username: String!) {
-  createUser (username: $username) {
-   id
-   username
-  }
+mutation login ($email: String!, $password: String!) {
+  login (email: $email, password: $password)
 }`;
