@@ -17,8 +17,8 @@ query allUsers {
 `;
 
 export const register = gql`
-mutation register ($username: String!) {
-  createUser (username: $username) {
+mutation register ($username: String!, $email: String!, $password: String!) {
+  register (username: $username, email: $email, password: $password) {
    id
    username
   }

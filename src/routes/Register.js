@@ -35,6 +35,18 @@ class Register extends React.Component {
           onChange={e => this.onChange(e)}
           value={this.state.username}
           />
+        <Input
+          name='email'
+          placeholder='email'
+          onChange={e => this.onChange(e)}
+          value={this.state.email}
+          />
+        <Input
+          name='password'
+          placeholder='password'
+          onChange={e => this.onChange(e)}
+          value={this.state.password}
+          />
           <Button onClick={() => this.onSubmit()} type='primary'>Register</Button>
       </div>
     )
