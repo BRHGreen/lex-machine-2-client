@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input } from 'antd'
 import { graphql } from 'react-apollo'
-import { login } from '../graphql/user'
+import { login, currentUser } from '../graphql/user'
 
 class Login extends React.Component {
   state = {
@@ -17,11 +17,13 @@ class Login extends React.Component {
   onSubmit = async () => {
     const response = await this.props.mutate({
       variables: this.state,
+      refetchQueries: [{ currentUser }]
     })
     console.log(response);
   }
 
   render () {
+    console.log('props:', this.props);
     return (
       <div>
       <h1>Login</h1>
@@ -44,4 +46,6 @@ class Login extends React.Component {
   }
 }
 
-export default graphql(login)(Login)
+export default graphql(login)(
+  graphql(currentUser)(Login)
+)

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 import { graphql } from 'react-apollo';
-import { allUsers, me } from '../graphql/user';
+import { currentUser } from '../graphql/user';
 
 
 class Home extends React.Component {
@@ -19,4 +19,4 @@ class Home extends React.Component {
   }
 }
 
-export default graphql(allUsers)(Home)
+export default graphql(currentUser)(Home)
