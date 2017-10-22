@@ -5,7 +5,8 @@ import { login, currentUser } from '../graphql/user'
 
 class Login extends React.Component {
   state = {
-    username: ''
+    email: '',
+    password: ''
   }
 
   onChange = (e) => {
@@ -17,9 +18,8 @@ class Login extends React.Component {
   onSubmit = async () => {
     const response = await this.props.mutate({
       variables: this.state,
-      refetchQueries: [{ currentUser }]
     })
-    console.log(response);
+    console.log('login res: ', response);
   }
 
   render () {
