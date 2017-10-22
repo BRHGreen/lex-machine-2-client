@@ -1,12 +1,13 @@
 import React from 'react';
-import Routes from './routes'
-import ReactDOM from 'react-dom'
-import { ApolloClient, createNetworkInterface, ApolloProvider } from 'react-apollo'
+import ReactDOM from 'react-dom';
+import { ApolloClient, createNetworkInterface, ApolloProvider } from 'react-apollo';
+// import 'semantic-ui-css/semantic.min.css';
 
-import 'antd/dist/antd.css';
+import Routes from './routes';
+
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:3000/graphql'
+  uri: 'http://localhost:3000/graphql',
 });
 
 networkInterface.use([
@@ -40,13 +41,13 @@ networkInterface.useAfter([
 ]);
 
 const client = new ApolloClient({
-  networkInterface: networkInterface
-})
+  networkInterface,
+});
 
-const App = () => (
+const App = (
   <ApolloProvider client={client}>
     <Routes />
   </ApolloProvider>
-)
+);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(App, document.getElementById('root'));
