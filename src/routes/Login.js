@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input } from 'antd'
 import { graphql } from 'react-apollo'
-import { login, currentUser } from '../graphql/user'
+import { loginMutation } from '../graphql/user'
 
 class Login extends React.Component {
   state = {
@@ -46,6 +46,4 @@ class Login extends React.Component {
   }
 }
 
-export default graphql(login)(
-  graphql(currentUser)(Login)
-)
+export default graphql(loginMutation)(Login)

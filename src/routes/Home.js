@@ -1,8 +1,4 @@
-import React from 'react';
-import { Input } from 'antd';
-import { graphql } from 'react-apollo';
-import { currentUser } from '../graphql/user';
-
+import React from 'react'
 
 class Home extends React.Component {
   state = {
@@ -10,7 +6,6 @@ class Home extends React.Component {
   }
 
   render () {
-    console.log('this.props', this.props);
     return (
       <div>
         <h1>Home</h1>
@@ -19,4 +14,4 @@ class Home extends React.Component {
   }
 }
 
-export default graphql(currentUser)(Home)
+export default Home

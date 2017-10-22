@@ -1,13 +1,6 @@
 import gql from 'graphql-tag'
 
-export const currentUser = gql`
-query me {
-  me {
-    id
-    username
-  }
-}
-`;
+
 export const allUsers = gql`
 query allUsers {
     allUsers {
@@ -16,14 +9,25 @@ query allUsers {
   }
 `;
 
-export const register = gql`
-mutation register ($username: String!, $email: String!, $password: String!) {
-  register (username: $username, email: $email, password: $password) {
-   id
-   username
-  }
-}`;
-export const login = gql`
-mutation login ($email: String!, $password: String!) {
-  login (email: $email, password: $password)
-}`;
+export const loginMutation = gql`
+mutation($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        ok
+        token
+        refreshToken
+        errors {
+          path
+          message
+        }
+      }
+    }`;
+export const registerMutation = gql`
+mutation($username: String!, $email: String!, $password: String!) {
+    register(username: $username, email: $email, password: $password) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }`;
