@@ -5,22 +5,26 @@ import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-rea
 import { gql, graphql } from 'react-apollo';
 
 class CreateWord extends React.Component {
-  state = {
-    word: '',
-    wordError: '',
+  constructor(props) {
+    super(props);
+
+    extendObservable(this, {
+      word: '',
+      errors: {},
+    });
   }
 
   onSubmit = async () => {
-    this.setState({
-      word: '',
-      wordError,
-    });
-
-    const { word } = this.state;
+    const { word } = this;
     const response = await this.props.mutate({
       variables: { word },
     });
-    const { ok, errors, } = response.data.createWord;
+
+    console.log('res: ', response);
+
+    const {
+      ok, errors,
+    } = response.data.createWord;
 
     if (ok) {
       this.props.history.push('/');
@@ -30,15 +34,14 @@ class CreateWord extends React.Component {
         err[`${path}Error`] = message;
       });
 
-      this.setState(err);
+      this.errors = err;
     }
-    console.log('res: ', response);
   };
 
   onChange = (e) => {
     console.log('onChange:', e.target.value);
-    const { word, value } = e.target;
-    this[word] = value;
+    const { name, value } = e.target;
+    this[name] = value;
   };
 
   render() {
