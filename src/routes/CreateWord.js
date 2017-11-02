@@ -2,7 +2,8 @@ import React from 'react';
 import { extendObservable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import { createWord } from '../graphql/word';
 
 class CreateWord extends React.Component {
   constructor(props) {
@@ -69,17 +70,5 @@ class CreateWord extends React.Component {
     );
   }
 }
-
-const createWord = gql`
-  mutation($word: String!) {
-    createWord(word: $word) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 export default graphql(createWord)(observer(CreateWord));

@@ -2,7 +2,8 @@ import React from 'react';
 import { extendObservable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import { login } from '../graphql/auth';
 
 class Login extends React.Component {
   constructor(props) {
@@ -86,18 +87,4 @@ class Login extends React.Component {
   }
 }
 
-const loginMutation = gql`
-  mutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      ok
-      token
-      refreshToken
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
-
-export default graphql(loginMutation)(observer(Login));
+export default graphql(login)(observer(Login));

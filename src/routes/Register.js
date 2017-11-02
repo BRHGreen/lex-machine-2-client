@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Message, Button, Input, Container, Header } from 'semantic-ui-react';
-import { gql, graphql } from 'react-apollo';
-// import { registerMutation } from '../graphql/user'
+import { graphql } from 'react-apollo';
+import { register } from '../graphql/auth'
 
 class Register extends React.Component {
   state = {
@@ -103,16 +103,4 @@ class Register extends React.Component {
   }
 }
 
-const registerMutation = gql`
-  mutation($username: String!, $email: String!, $password: String!) {
-    register(username: $username, email: $email, password: $password) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
-
-export default graphql(registerMutation)(Register);
+export default graphql(register)(Register);
