@@ -3,29 +3,29 @@ import { getUser } from '../graphql/user'
 import { graphql } from 'react-apollo'
 import decode from 'jwt-decode'
 
+const currentUser = () => {
+  const token = localStorage.getItem('token');
+  const user = decode(token);
+  return(user);
+}
+
 class Home extends React.Component {
   render () {
-    const { loading } = this.props
+    const { loading } = this.props.data
     if (loading) {
       return null;
     }
-    let username = '';
-    try {
-      const token = localStorage.getItem('token');
-      const user = decode(token);
-      console.log('user: ', user);
-    } catch (err) {
-      console.log(err);
-    }
-    console.log('username: ', username);
-    console.log('this.props: ', this.props);
     return (
       <div>
-        <h1>Home</h1>
+      {!loading &&
+        <h1>Hello, {this.props.data.getUser.username}</h1>
+      }
       </div>
     )
   }
 }
 
-export default graphql(getUser, { options : { variables: { id: 1 }}})(Home)
-// export default Home
+console.log('currentUser', currentUser().user.id);
+
+// export default graphql(getUser, { options : { variables: { id: currentUser().user.id }}})(Home)
+export default Home
