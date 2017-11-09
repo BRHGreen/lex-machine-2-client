@@ -10,8 +10,8 @@ query allUsers {
 `;
 
 export const getUser = gql`
-  query {
-  getUser {
+  query($id: Int!) {
+  getUser(id: $id) {
     username
   }
 }

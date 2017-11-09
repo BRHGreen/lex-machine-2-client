@@ -1,12 +1,9 @@
 import React from 'react'
-// import { getUser } from '../graphql/user'
+import { getUser } from '../graphql/user'
 import { graphql } from 'react-apollo'
 import decode from 'jwt-decode'
 
 class Home extends React.Component {
-
-
-
   render () {
     const { loading } = this.props
     if (loading) {
@@ -30,5 +27,5 @@ class Home extends React.Component {
   }
 }
 
-// export default graphql (getUser)(Home)
-export default Home
+export default graphql(getUser, { options : { variables: { id: 1 }}})(Home)
+// export default Home
