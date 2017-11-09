@@ -1,11 +1,27 @@
 import React from 'react'
+// import { getUser } from '../graphql/user'
+import { graphql } from 'react-apollo'
+import decode from 'jwt-decode'
 
 class Home extends React.Component {
-  state = {
-    username: ''
-  }
+
+
 
   render () {
+    const { loading } = this.props
+    if (loading) {
+      return null;
+    }
+    let username = '';
+    try {
+      const token = localStorage.getItem('token');
+      const user = decode(token);
+      console.log('user: ', user);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log('username: ', username);
+    console.log('this.props: ', this.props);
     return (
       <div>
         <h1>Home</h1>
@@ -14,4 +30,5 @@ class Home extends React.Component {
   }
 }
 
+// export default graphql (getUser)(Home)
 export default Home

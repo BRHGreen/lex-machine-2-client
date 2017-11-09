@@ -9,6 +9,14 @@ query allUsers {
   }
 `;
 
+export const getUser = gql`
+  query {
+  getUser {
+    username
+  }
+}
+`;
+
 export const loginMutation = gql`
 mutation($email: String!, $password: String!) {
       login(email: $email, password: $password) {
