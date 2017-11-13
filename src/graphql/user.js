@@ -10,11 +10,13 @@ query allUsers {
 `;
 
 export const getUser = gql`
-  query($id: Int!) {
-  getUser(id: $id) {
-    username
+  {
+    getUser {
+      id
+      username
+      email
+    }
   }
-}
 `;
 
 export const loginMutation = gql`
