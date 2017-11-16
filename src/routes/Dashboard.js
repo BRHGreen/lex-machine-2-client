@@ -5,10 +5,12 @@ import { graphql } from 'react-apollo'
 class Dashboard extends React.Component {
   render () {
     console.log('this.props: ', this.props);
-    const { currentUser } = this.props
+    const { getUser, loading } = this.props.data
     return (
       <div>
-        <h1>Dashboard</h1>
+      {!loading &&
+        <h1>user: {getUser.username}</h1>
+      }
       </div>
     )
   }
