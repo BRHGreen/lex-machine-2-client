@@ -11,14 +11,15 @@ class CreateProfile extends React.Component {
 
     extendObservable(this, {
       age: '',
+      occupation: '',
       errors: {},
     });
   }
 
   onSubmit = async () => {
-    const { age } = this;
+    const { age, occupation } = this;
     const response = await this.props.mutate({
-      variables: { age },
+      variables: { age, occupation },
     });
 
     console.log('res: ', response);
@@ -46,7 +47,7 @@ class CreateProfile extends React.Component {
   };
 
   render() {
-    const { age, errors: { profileError, } } = this;
+    const { age, occupation, errors: { profileError, } } = this;
 
     const errorList = [];
 
@@ -60,6 +61,9 @@ class CreateProfile extends React.Component {
         <Form>
           <Form.Field error={!!profileError}>
             <Input name="age" onChange={this.onChange} placeholder="age" value={age} fluid />
+          </Form.Field>
+          <Form.Field error={!!profileError}>
+            <Input name="occupation" onChange={this.onChange} placeholder="occupation" value={occupation} fluid />
           </Form.Field>
           <Button onClick={this.onSubmit}>Save</Button>
         </Form>

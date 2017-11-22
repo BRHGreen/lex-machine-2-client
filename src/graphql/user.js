@@ -20,6 +20,7 @@ export const getUser = gql`
       }
       profile {
         age
+        occupation
       }
     }
   }
@@ -49,8 +50,8 @@ mutation($username: String!, $email: String!, $password: String!) {
   }`;
   
 export const createProfileMutation = gql`
-mutation($age: Int) {
-  createProfile(age: $age) {
+mutation($age: Int, $occupation: String) {
+  createProfile(age: $age, occupation: $occupation) {
     ok
     errors {
       path
