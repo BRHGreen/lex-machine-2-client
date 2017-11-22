@@ -4,6 +4,7 @@ import App from './App'
 import Register from './Register'
 import Login from './Login'
 import CreateWord from './CreateWord'
+import CreateProfile from './CreateProfile'
 
 import {
   BrowserRouter,
@@ -47,6 +48,7 @@ export default () =>(
       <Route path="/register" exact component={Register} />
       <Route path="/login" exact component={Login} />
       <PrivateRoute path="/create-word" exact component={CreateWord} />
+      <PrivateRoute path="/create-profile" exact component={CreateProfile} />
     </Switch>
   </BrowserRouter>
 )

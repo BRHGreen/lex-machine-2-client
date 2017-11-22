@@ -18,6 +18,9 @@ export const getUser = gql`
       words {
         word
       }
+      profile {
+        age
+      }
     }
   }
 `;
@@ -44,3 +47,14 @@ mutation($username: String!, $email: String!, $password: String!) {
       }
     }
   }`;
+  
+export const createProfileMutation = gql`
+mutation($age: Int) {
+  createProfile(age: $age) {
+    ok
+    errors {
+      path
+      message
+    }
+  }
+}`;
