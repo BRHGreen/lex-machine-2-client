@@ -6,23 +6,21 @@ import { graphql } from 'react-apollo';
 import { login } from '../graphql/auth';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-
-    extendObservable(this, {
+    state = {
       email: '',
       password: '',
       errors: {},
-    });
-  }
+    };
 
   onSubmit = async () => {
-    const { email, password } = this;
+    this.setState({
+      errors: {}
+    })
+    console.log('state:',this.state);
+    const { email, password } = this.state;
     const response = await this.props.mutate({
       variables: { email, password },
     });
-
-    console.log(response);
 
     const {
       ok, token, refreshToken, errors,
@@ -38,17 +36,18 @@ class Login extends React.Component {
         err[`${path}Error`] = message;
       });
 
-      this.errors = err;
+      this.setState(err);
     }
+    console.log('login res:', response);
   };
 
   onChange = (e) => {
     const { name, value } = e.target;
-    this[name] = value;
+    this.setState({ [name]: value });
   };
 
   render() {
-    const { email, password, errors: { emailError, passwordError } } = this;
+    const { email, password, errors: { emailError, passwordError } } = this.state;
 
     const errorList = [];
 
@@ -87,4 +86,4 @@ class Login extends React.Component {
   }
 }
 
-export default graphql(login)(observer(Login));
+export default graphql(login)(Login);

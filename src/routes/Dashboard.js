@@ -9,7 +9,15 @@ class Dashboard extends React.Component {
     return (
       <div>
       {!loading &&
-        <h1>user: {getUser.username}</h1>
+        <div>
+          <h1>user: {getUser.username}</h1>
+          {getUser.profile &&
+          <div>
+            <h1>age: {getUser.profile.age}</h1>
+            <h1>occupation: {getUser.profile.occupation}</h1>
+          </div>
+        }
+        </div>
       }
       </div>
     )
