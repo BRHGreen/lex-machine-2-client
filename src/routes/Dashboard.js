@@ -1,6 +1,7 @@
 import React from 'react'
 import { getUser } from '../graphql/user'
 import { graphql } from 'react-apollo'
+import '../styles/app.css'
 
 class Dashboard extends React.Component {
   render () {
@@ -9,7 +10,7 @@ class Dashboard extends React.Component {
     return (
       <div>
       {!loading &&
-        <div>
+        <div className='test'>
           <h1>user: {getUser.username}</h1>
           {getUser.profile &&
           <div>
