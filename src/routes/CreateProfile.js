@@ -1,6 +1,4 @@
 import React from 'react';
-import { extendObservable } from 'mobx';
-import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { createProfileMutation } from '../graphql/user';
 
@@ -11,10 +9,8 @@ class CreateProfile extends React.Component {
       errors: {},
     }
 
-  onSubmit = async () => {
-    this.setState({
-      errors: {}
-    })
+  onSubmit = async (event) => {
+    event.preventDefault()
     const { age, occupation } = this.state;
     const response = await this.props.mutate({
       variables: { age, occupation },
@@ -45,7 +41,7 @@ class CreateProfile extends React.Component {
   };
 
   render() {
-    const { age, occupation, errors: { profileError, } } = this.state;
+    const { age, occupation, profileError } = this.state;
 
     const errorList = [];
 
@@ -54,21 +50,21 @@ class CreateProfile extends React.Component {
     }
 
     return (
-      <Container text>
-        <Header as="h2">Create Profile</Header>
-        <Form>
-          <Form.Field error={!!profileError}>
-            <Input name="age" onChange={this.onChange} placeholder="age" value={age} fluid />
-          </Form.Field>
-          <Form.Field error={!!profileError}>
-            <Input name="occupation" onChange={this.onChange} placeholder="occupation" value={occupation} fluid />
-          </Form.Field>
-          <Button onClick={this.onSubmit}>Save</Button>
-        </Form>
-        {errorList.length ? (
-          <Message error header="There was some errors with your submission" list={errorList} />
-        ) : null}
-      </Container>
+      <div>
+        <h2>Create Profile</h2>
+        <form>
+            <input name="age" onChange={this.onChange} placeholder="age" value={age} />
+            <input name="occupation" onChange={this.onChange} placeholder="occupation" value={occupation}
+          />
+          <button onClick={this.onSubmit}>Save</button>
+        </form>
+        {errorList.length ?
+          <ul>
+            <li>There was some errors with your submission</li>
+            <li>{errorList}</li>
+          </ul>
+         : null}
+      </div>
     );
   }
 }

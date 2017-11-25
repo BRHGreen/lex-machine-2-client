@@ -1,6 +1,4 @@
 import React from 'react';
-import { extendObservable } from 'mobx';
-import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { login } from '../graphql/auth';
 
@@ -11,11 +9,8 @@ class Login extends React.Component {
       errors: {},
     };
 
-  onSubmit = async () => {
-    this.setState({
-      errors: {}
-    })
-    console.log('state:',this.state);
+  onSubmit = async (event) => {
+    event.preventDefault()
     const { email, password } = this.state;
     const response = await this.props.mutate({
       variables: { email, password },
@@ -37,7 +32,6 @@ class Login extends React.Component {
 
       this.setState(err);
     }
-    console.log('login res:', response);
   };
 
   onChange = (e) => {
@@ -46,7 +40,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { email, password, errors: { emailError, passwordError } } = this.state;
+    const { email, password, emailError, passwordError } = this.state;
 
     const errorList = [];
 
@@ -59,28 +53,26 @@ class Login extends React.Component {
     }
 
     return (
-      <Container text>
-        <Header as="h2">Login</Header>
-        <Form>
-          <Form.Field error={!!emailError}>
-            <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid />
-          </Form.Field>
-          <Form.Field error={!!passwordError}>
-            <Input
-              name="password"
-              onChange={this.onChange}
-              value={password}
-              type="password"
-              placeholder="Password"
-              fluid
-            />
-          </Form.Field>
-          <Button onClick={this.onSubmit}>Submit</Button>
-        </Form>
-        {errorList.length ? (
-          <Message error header="There was some errors with your submission" list={errorList} />
-        ) : null}
-      </Container>
+      <div>
+        <h2>Login</h2>
+        <form>
+          <input name="email" onChange={this.onChange} value={email} placeholder="Email" />
+          <input
+          name="password"
+          onChange={this.onChange}
+          value={password}
+          type="password"
+          placeholder="Password"
+          />
+          <button onClick={this.onSubmit} >Submit</button>
+        </form>
+        {errorList.length ?
+          <ul>
+            <li>There was some errors with your submission</li>
+            <li>{errorList}</li>
+          </ul>
+         : null}
+      </div>
     );
   }
 }

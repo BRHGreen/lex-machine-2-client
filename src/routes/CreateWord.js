@@ -1,6 +1,4 @@
 import React from 'react';
-import { extendObservable } from 'mobx';
-import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { createWord } from '../graphql/word';
 
@@ -10,7 +8,8 @@ class CreateWord extends React.Component {
     errors: {},
   }
 
-  onSubmit = async () => {
+  onSubmit = async (event) => {
+    event.preventDefault()
     const { word } = this.state;
     const response = await this.props.mutate({
       variables: { word },
@@ -41,7 +40,7 @@ class CreateWord extends React.Component {
   };
 
   render() {
-    const { word, errors: { wordError, } } = this.state;
+    const { word, wordError } = this.state;
 
     const errorList = [];
 
@@ -50,18 +49,19 @@ class CreateWord extends React.Component {
     }
 
     return (
-      <Container text>
-        <Header as="h2">Create Word</Header>
-        <Form>
-          <Form.Field error={!!wordError}>
-            <Input name="word" onChange={this.onChange} placeholder="Word" value={word} fluid />
-          </Form.Field>
-          <Button onClick={this.onSubmit}>Save</Button>
-        </Form>
-        {errorList.length ? (
-          <Message error header="There was some errors with your submission" list={errorList} />
-        ) : null}
-      </Container>
+      <div>
+        <h2>Create Word</h2>
+        <form>
+            <input name="word" onChange={this.onChange} placeholder="Word" value={word} />
+          <button onClick={this.onSubmit}>Save</button>
+        </form>
+        {errorList.length ?
+          <ul>
+            <li>There was some errors with your submission</li>
+            <li>{errorList}</li>
+          </ul>
+         : null}
+      </div>
     );
   }
 }

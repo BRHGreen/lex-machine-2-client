@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form, Message, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { register } from '../graphql/auth'
 
@@ -13,7 +12,8 @@ class Register extends React.Component {
     passwordError: '',
   };
 
-  onSubmit = async () => {
+  onSubmit = async (event) => {
+    event.preventDefault()
     this.setState({
       usernameError: '',
       emailError: '',
@@ -68,37 +68,34 @@ class Register extends React.Component {
     }
 
     return (
-      <Container text>
-        <Header as="h2">Register</Header>
-        <Form>
-          <Form.Field error={!!usernameError}>
-            <Input
+      <div>
+        <h2>Register</h2>
+        <form>
+            <input
               name="username"
               onChange={this.onChange}
               value={username}
               placeholder="Username"
-              fluid
+
             />
-          </Form.Field>
-          <Form.Field error={!!emailError}>
-            <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid />
-          </Form.Field>
-          <Form.Field error={!!passwordError}>
-            <Input
+            <input name="email" onChange={this.onChange} value={email} placeholder="Email" />
+            <input
               name="password"
               onChange={this.onChange}
               value={password}
               type="password"
               placeholder="Password"
-              fluid
+
             />
-          </Form.Field>
-          <Button onClick={this.onSubmit}>Submit</Button>
-        </Form>
-        {errorList.length ? (
-          <Message error header="There was some errors with your submission" list={errorList} />
-        ) : null}
-      </Container>
+          <button onClick={this.onSubmit}>Submit</button>
+        </form>
+        {errorList.length ?
+          <ul>
+            <li>There was some errors with your submission</li>
+            <li>{errorList}</li>
+          </ul>
+         : null}
+      </div>
     );
   }
 }
