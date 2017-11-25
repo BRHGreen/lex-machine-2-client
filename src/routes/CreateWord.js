@@ -49,11 +49,11 @@ class CreateWord extends React.Component {
     }
 
     return (
-      <div>
+      <div className='centered'>
         <h2>Create Word</h2>
-        <form>
+        <form className='form-group'>
             <input name="word" onChange={this.onChange} placeholder="Word" value={word} />
-          <button onClick={this.onSubmit}>Save</button>
+          <button className="btn" onClick={this.onSubmit}>Save</button>
         </form>
         {errorList.length ?
           <ul>

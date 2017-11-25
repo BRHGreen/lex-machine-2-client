@@ -68,9 +68,9 @@ class Register extends React.Component {
     }
 
     return (
-      <div>
+      <div className='centered'>
         <h2>Register</h2>
-        <form>
+        <form className='form-group'>
             <input
               name="username"
               onChange={this.onChange}
@@ -87,7 +87,7 @@ class Register extends React.Component {
               placeholder="Password"
 
             />
-          <button onClick={this.onSubmit}>Submit</button>
+          <button className='btn' onClick={this.onSubmit}>Submit</button>
         </form>
         {errorList.length ?
           <ul>

@@ -50,13 +50,13 @@ class CreateProfile extends React.Component {
     }
 
     return (
-      <div>
+      <div className='centered'>
         <h2>Create Profile</h2>
-        <form>
+        <form className='form-group'>
             <input name="age" onChange={this.onChange} placeholder="age" value={age} />
             <input name="occupation" onChange={this.onChange} placeholder="occupation" value={occupation}
           />
-          <button onClick={this.onSubmit}>Save</button>
+          <button className='btn' onClick={this.onSubmit}>Save</button>
         </form>
         {errorList.length ?
           <ul>

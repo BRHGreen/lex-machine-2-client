@@ -1,5 +1,23 @@
-/*@import "variables";*/
-.test {
-  background: $color;
-  color: blue;
+body {
+  padding: 4em 2em;
+}
+.centered {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+input {
+  margin-bottom: .5em;
+  padding: 5px;
+}
+
+input::-webkit-input-placeholder {
+color: #adbdd6 !important;
 }

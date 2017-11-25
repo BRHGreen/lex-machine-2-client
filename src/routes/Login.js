@@ -53,9 +53,9 @@ class Login extends React.Component {
     }
 
     return (
-      <div>
+      <div className='centered'>
         <h2>Login</h2>
-        <form>
+        <form className='form-group'>
           <input name="email" onChange={this.onChange} value={email} placeholder="Email" />
           <input
           name="password"
@@ -64,7 +64,7 @@ class Login extends React.Component {
           type="password"
           placeholder="Password"
           />
-          <button onClick={this.onSubmit} >Submit</button>
+          <button className='btn' onClick={this.onSubmit} >Submit</button>
         </form>
         {errorList.length ?
           <ul>
