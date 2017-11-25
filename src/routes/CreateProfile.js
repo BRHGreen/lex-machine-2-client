@@ -1,23 +1,21 @@
 import React from 'react';
 import { extendObservable } from 'mobx';
-import { observer } from 'mobx-react';
 import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { createProfileMutation } from '../graphql/user';
 
 class CreateProfile extends React.Component {
-  constructor(props) {
-    super(props);
-
-    extendObservable(this, {
+    state = {
       age: '',
       occupation: '',
       errors: {},
-    });
-  }
+    }
 
   onSubmit = async () => {
-    const { age, occupation } = this;
+    this.setState({
+      errors: {}
+    })
+    const { age, occupation } = this.state;
     const response = await this.props.mutate({
       variables: { age, occupation },
     });
@@ -36,18 +34,18 @@ class CreateProfile extends React.Component {
         err[`${path}Error`] = message;
       });
 
-      this.errors = err;
+      this.setState(err);
     }
   };
 
   onChange = (e) => {
     console.log('onChange:', e.target.value);
     const { name, value } = e.target;
-    this[name] = value;
+    this.setState({ [name]: value });
   };
 
   render() {
-    const { age, occupation, errors: { profileError, } } = this;
+    const { age, occupation, errors: { profileError, } } = this.state;
 
     const errorList = [];
 
@@ -75,4 +73,4 @@ class CreateProfile extends React.Component {
   }
 }
 
-export default graphql(createProfileMutation)(observer(CreateProfile));
+export default graphql(createProfileMutation)(CreateProfile);

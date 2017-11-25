@@ -1,6 +1,5 @@
 import React from 'react';
 import { extendObservable } from 'mobx';
-import { observer } from 'mobx-react';
 import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { login } from '../graphql/auth';

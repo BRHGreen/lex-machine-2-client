@@ -1,22 +1,17 @@
 import React from 'react';
 import { extendObservable } from 'mobx';
-import { observer } from 'mobx-react';
 import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { createWord } from '../graphql/word';
 
 class CreateWord extends React.Component {
-  constructor(props) {
-    super(props);
-
-    extendObservable(this, {
-      word: '',
-      errors: {},
-    });
+  state = {
+    word: '',
+    errors: {},
   }
 
   onSubmit = async () => {
-    const { word } = this;
+    const { word } = this.state;
     const response = await this.props.mutate({
       variables: { word },
     });
@@ -35,18 +30,18 @@ class CreateWord extends React.Component {
         err[`${path}Error`] = message;
       });
 
-      this.errors = err;
+      this.setState(err);
     }
   };
 
   onChange = (e) => {
     console.log('onChange:', e.target.value);
     const { name, value } = e.target;
-    this[name] = value;
+    this.setState({ [name]: value });
   };
 
   render() {
-    const { word, errors: { wordError, } } = this;
+    const { word, errors: { wordError, } } = this.state;
 
     const errorList = [];
 
@@ -71,4 +66,4 @@ class CreateWord extends React.Component {
   }
 }
 
-export default graphql(createWord)(observer(CreateWord));
+export default graphql(createWord)(CreateWord);
