@@ -11,3 +11,8 @@ export const createWord = gql`
     }
   }
 `;
+export const deleteWord = gql`
+  mutation($word: String!) {
+    deleteWord(word: $word)
+  }
+`;
