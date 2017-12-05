@@ -9,15 +9,29 @@ class Dashboard extends React.Component {
     const { getUser, loading } = this.props.data
     return (
       <div>
-      {!loading &&
+      {getUser &&
         <div>
           <h1>user: {getUser.username}</h1>
-          {getUser.profile &&
           <div>
             <h1>age: {getUser.profile.age}</h1>
             <h1>occupation: {getUser.profile.occupation}</h1>
           </div>
-        }
+          <div>
+            <h3>Your Words:</h3>
+              <ul>
+              {getUser.words &&
+                getUser.words.map((word, i) => {
+                  return (
+                  <li key={i}>
+                    <p>{word.word}</p>
+                  <button onClick={() => alert('update')}>Update</button>
+                  <button onClick={() => alert('delete')}>Delete</button>
+                  </li>
+                  )
+                })
+              }
+              </ul>
+          </div>
         </div>
       }
       </div>

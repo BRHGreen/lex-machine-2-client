@@ -21,3 +21,12 @@ input {
 input::-webkit-input-placeholder {
 color: #adbdd6 !important;
 }
+ul {
+  list-style: none;
+}
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
