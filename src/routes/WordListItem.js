@@ -1,18 +1,16 @@
 import React from 'react';
-
-const WordListItem = (getUser) => {
-    console.log('getUser', getUser)
+const WordListItem = ({ getUser }) => { console.log('getUser', getUser)
     return (
         <div>
-        {getUser.words && getUser.words.map((word, i) => {
-            console.log('word', word),
-            <li key={i}>
+   {getUser.words && getUser.words.map((word, i) => {
+       return (
+           <li key={i}>
             <p>{word.word}</p>
             <button onClick={() => alert('update')}>Update</button>
             <button onClick={() => alert('delete')}>Delete</button>
-            </li>
-        })
-    }
+           </li>
+       )
+   })} 
     </div>
     )
 }
