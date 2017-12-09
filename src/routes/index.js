@@ -4,13 +4,15 @@ import App from './App'
 import Register from './Register'
 import Login from './Login'
 import CreateWord from './CreateWord'
+import Word from './Word'
 import CreateProfile from './CreateProfile'
 
 import {
   BrowserRouter,
   Route,
   Switch,
-  Redirect
+  Redirect,
+  params,
 } from 'react-router-dom'
 
 const isAuthenticated = () => {
@@ -49,6 +51,7 @@ export default () =>(
       <Route path="/login" exact component={Login} />
       <PrivateRoute path="/create-word" exact component={CreateWord} />
       <PrivateRoute path="/create-profile" exact component={CreateProfile} />
+      <Route path="/word/:id" exact component={Word} />
     </Switch>
   </BrowserRouter>
 )

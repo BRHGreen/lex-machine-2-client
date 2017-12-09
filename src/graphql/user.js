@@ -17,6 +17,7 @@ export const getUser = gql`
       email
       words {
         word
+        id
       }
       profile {
         age
