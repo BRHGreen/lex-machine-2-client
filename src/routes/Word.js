@@ -9,11 +9,7 @@ class Word extends React.Component {
         errors: {},
     }
     render () {
-        console.log('this.props:', this.props.match.params.id)
         const { getWord } = this.props.data
-        {getWord &&
-            console.log('word',  getWord.word)
-        }
         return (
             <div>
             {getWord &&

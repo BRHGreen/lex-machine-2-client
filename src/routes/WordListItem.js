@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const WordListItem = ({ getUser, deleteWord }) => { 
     return (
@@ -6,9 +7,11 @@ const WordListItem = ({ getUser, deleteWord }) => {
    {getUser.words && getUser.words.map((word, i) => {
        return (
            <li key={i}>
-           <p>{word.word}</p>
-           <button onClick={() => alert(word.id)}>Update</button>
-           <button onClick={() => deleteWord(word.word)}>Delete</button>
+            <p>{word.word}</p>
+                <Link to={`/word/${word.id}`}>
+                    <button>Update</button>
+                </Link>
+            <button onClick={() => deleteWord(word.word)}>Delete</button>
            </li>
        )
    })} 
