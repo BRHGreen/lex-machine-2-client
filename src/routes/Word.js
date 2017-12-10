@@ -5,15 +5,29 @@ import { updareWord } from '../graphql/word'
 
 class Word extends React.Component {
     state = {
+        isEditing: false,
         word: '',
         errors: {},
+    }
+    handleIsEditing () {
+        this.setState({ isEditing: !this.state.isEditing })
+        console.log('this.state:', this.state)
+    }
+    onChange = (e) => {
+        console.log('e:', e)
+        console.log('change', e.target.value)
+        this.setState({ word: e.target.value })
     }
     render () {
         const { getWord } = this.props.data
         return (
-            <div>
+            <div onClick={() => this.handleIsEditing()}>
             {getWord &&
-                <p>{getWord.word}</p>
+                <input
+                    placeholder={getWord.word}
+                    value={this.state.word}
+                    onChange={this.onChange}
+                />
             }
             </div>
         )

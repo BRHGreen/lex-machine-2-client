@@ -9,7 +9,7 @@ const WordListItem = ({ getUser, deleteWord }) => {
            <li key={i}>
             <p>{word.word}</p>
                 <Link to={`/word/${word.id}`}>
-                    <button>Update</button>
+                    <button>Edit</button>
                 </Link>
             <button onClick={() => deleteWord(word.word)}>Delete</button>
            </li>
