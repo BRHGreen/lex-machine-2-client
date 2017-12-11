@@ -22,6 +22,7 @@ class Word extends React.Component {
         const { getWord } = this.props.data
         return (
             <div onClick={() => this.handleIsEditing()}>
+            
             {getWord &&
                 <input
                     placeholder={getWord.word}

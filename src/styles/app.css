@@ -1,16 +1,17 @@
 body {
   padding: 4em 2em;
 }
+.capalaize {
+  text-transform: capitalize;
+}
+section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .centered {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 50%;
 }
 
 input {

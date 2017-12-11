@@ -1,37 +1,11 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import { createWord } from '../graphql/word';
 
 class CreateWord extends React.Component {
   state = {
     word: '',
     errors: {},
   }
-
-  onSubmit = async (event) => {
-    event.preventDefault()
-    const { word } = this.state;
-    const response = await this.props.mutate({
-      variables: { word },
-    });
-
-    console.log('res: ', response);
-
-    const {
-      ok, errors,
-    } = response.data.createWord;
-
-    if (ok) {
-      this.props.history.push('/');
-    } else {
-      const err = {};
-      errors.forEach(({ path, message }) => {
-        err[`${path}Error`] = message;
-      });
-
-      this.setState(err);
-    }
-  };
 
   onChange = (e) => {
     console.log('onChange:', e.target.value);
@@ -41,6 +15,7 @@ class CreateWord extends React.Component {
 
   render() {
     const { word, wordError } = this.state;
+    const { createWord } = this.props;
 
     const errorList = [];
 
@@ -49,11 +24,10 @@ class CreateWord extends React.Component {
     }
 
     return (
-      <div className='centered'>
-        <h2>Create Word</h2>
+      <section>
         <form className='form-group'>
-            <input name="word" onChange={this.onChange} placeholder="Word" value={word} />
-          <button className="btn" onClick={this.onSubmit}>Save</button>
+            <input name="word" onChange={this.onChange} placeholder="Add a word..." value={word} />
+          <button className="btn" onClick={(event)=> createWord(word, event)}>Save</button>
         </form>
         {errorList.length ?
           <ul>
@@ -61,9 +35,9 @@ class CreateWord extends React.Component {
             <li>{errorList}</li>
           </ul>
          : null}
-      </div>
+      </section>
     );
   }
 }
 
-export default graphql(createWord)(CreateWord);
+export default CreateWord;
