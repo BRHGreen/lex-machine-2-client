@@ -9,7 +9,7 @@ import { createWord } from '../graphql/word';
 
 class Dashboard extends React.Component {
   deleteWord = async (word) => {
-    const response =  await this.props.mutate({
+    const response =  await this.props.deleteWord({
       variables: { word },
       refetchQueries: [{
         query: getUser
@@ -20,8 +20,11 @@ class Dashboard extends React.Component {
     console.log('word', word)
     console.log('event', event)
     event.preventDefault()
-    const response = await this.props.mutate({
+    const response = await this.props.createWord({
       variables: { word },
+      refetchQueries: [{
+        query: getUser
+      }]
     });
     console.log('response', response)
     const {
@@ -43,7 +46,7 @@ class Dashboard extends React.Component {
   refreshWordList  
   render () {
     const { getUser } = this.props.data
-    console.log('username', this.props.data.getUser)
+    console.log('props:', this.props)
     return (
       <div>
       {getUser &&
