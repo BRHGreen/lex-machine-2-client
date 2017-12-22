@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { getWord } from '../graphql/word'
 import { updateWord } from '../graphql/word'
+import { getUser } from '../graphql/user'
 
 class Word extends React.Component {
     state = {
@@ -24,24 +25,12 @@ class Word extends React.Component {
         event.preventDefault()
         const response = await this.props.updateWord({
             variables: { word, newWord },
+            refetchQueries: [{
+                query: getUser
+            }]
         });
         console.log('response', response)
-        const {
-      ok, errors,
-    } = response.data.updateWord;
-
-        if (ok) {
-            return
-        }
-        // put some error handling in.
-        // else {
-        //     const err = {};
-        //     this.state.errors.forEach(({ path, message }) => {
-        //         err[`${path}Error`] = message;
-        //     });
-
-        //     this.setState(err);
-        // }
+        this.props.history.push('/');
     };
 
     render () {
