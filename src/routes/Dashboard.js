@@ -43,6 +43,11 @@ class Dashboard extends React.Component {
     }
   };
 
+  componentWillMount () {
+    const url = 'https://od-api.oxforddictionaries.com/api/v1/entries/en/cat&app_id=20bfa8a3&app_key=3948870312a18afd5821771de48afe86'
+    fetch(url).then(res => res.json())
+  }
+
   refreshWordList  
   render () {
     const { getUser } = this.props.data
