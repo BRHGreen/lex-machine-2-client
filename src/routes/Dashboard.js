@@ -44,9 +44,14 @@ class Dashboard extends React.Component {
   };
 
   componentWillMount () {
-    const url = 'https://od-api.oxforddictionaries.com/api/v1/entries/en/cat&app_id=20bfa8a3&app_key=3948870312a18afd5821771de48afe86'
-    fetch(url).then(res => res.json())
+    const uri = "http://api.wordnik.com:80/v4/word.json/table/definitions?limit=200&includeRelated=true&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
+    fetch(uri).then(res => {
+      return res.json()
+    }).then(data => {
+      console.log('data', data)
+    })
   }
+  
 
   refreshWordList  
   render () {

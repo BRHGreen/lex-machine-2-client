@@ -4954,6 +4954,10 @@ osenv@^0.1.0, osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
+oxford-dictionary-api@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/oxford-dictionary-api/-/oxford-dictionary-api-1.0.1.tgz#29fecd645b79b27d06106fc2db336f76fb409df3"
+
 p-finally@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
