@@ -34,5 +34,9 @@
     "spectre": "^0.0.1",
     "spectre.css": "^0.4.6"
   },
-  "homepage": "https://github.com/BRHGreen/lex-machine-2-client#readme"
+  "homepage": "https://github.com/BRHGreen/lex-machine-2-client#readme",
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-plugin-react": "^7.5.1"
+  }
 }

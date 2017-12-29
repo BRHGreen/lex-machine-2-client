@@ -1,11 +1,12 @@
 import React from 'react'
-import WordListItem from './WordListItem'
+import WordListItem from '../components/WordListItem'
 import CreateWord from './CreateWord'
 import { getUser } from '../graphql/user'
 import { deleteWord } from '../graphql/word'
 import { graphql, compose } from 'react-apollo'
 import '../styles/app.css'
-import { createWord } from '../graphql/word';
+import { createWord } from '../graphql/word'
+import { Define } from '../components/Wordnik'
 
 class Dashboard extends React.Component {
   deleteWord = async (word) => {
@@ -42,16 +43,6 @@ class Dashboard extends React.Component {
       this.setState(err);
     }
   };
-
-  componentWillMount () {
-    const uri = "http://api.wordnik.com:80/v4/word.json/table/definitions?limit=200&includeRelated=true&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
-    fetch(uri).then(res => {
-      return res.json()
-    }).then(data => {
-      console.log('data', data)
-    })
-  }
-  
 
   refreshWordList  
   render () {

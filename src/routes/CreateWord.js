@@ -1,5 +1,6 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
+import React from 'react'
+import { graphql } from 'react-apollo'
+import { Define } from '../components/Wordnik'
 
 class CreateWord extends React.Component {
   state = {
@@ -24,10 +25,10 @@ class CreateWord extends React.Component {
     }
 
     return (
-      <section>
+      <div>
         <form className='form-group'>
             <input name="word" onChange={this.onChange} placeholder="Add a word..." value={word} />
-          <button className="btn" onClick={(event)=> createWord(word, event)}>Save</button>
+          <button className="btn" onClick={(event)=> Define(word, event)}>Save</button>
         </form>
         {errorList.length ?
           <ul>
@@ -35,7 +36,7 @@ class CreateWord extends React.Component {
             <li>{errorList}</li>
           </ul>
          : null}
-      </section>
+      </div>
     );
   }
 }
