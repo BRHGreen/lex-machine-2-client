@@ -48,6 +48,6 @@ const App = (
   <ApolloProvider client={client}>
     <Routes />
   </ApolloProvider>
-);
+)
 
 ReactDOM.render(App, document.getElementById('root'));
