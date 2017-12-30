@@ -9,8 +9,8 @@ export const getWord = gql`
 `;
 
 export const createWord = gql`
-  mutation($word: String!) {
-    createWord(word: $word) {
+  mutation($word: String!, $partOfSpeach: String, $definition: String) {
+    createWord(word: $word, partOfSpeach: $partOfSpeach, definition: $definition) {
       ok
       errors {
         path
@@ -18,14 +18,14 @@ export const createWord = gql`
       }
     }
   }
-`;
+`
 export const updateWord = gql`
   mutation($word: String!, $newWord: String!) {
     updateWord(word: $word, newWord: $newWord)
   }
-`;
+`
 export const deleteWord = gql`
   mutation($word: String!) {
     deleteWord(word: $word)
   }
-`;
+`
