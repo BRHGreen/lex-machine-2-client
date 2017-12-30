@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
+import { define } from '../components/Wordnik'
 
 class CreateWord extends React.Component {
   state = {
@@ -8,23 +9,14 @@ class CreateWord extends React.Component {
     data: null,
   }
 
-  onChange = (event) => {
-    const { name, value } = event.target;
+  onChange = (e) => {
+    const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  define = async (word, event) => {
-    const apiKey = '30197bf4f65d0e10cc369439c2821011532dc2d97f23f3278'
-    const baseUri = 'http://api.wordnik.com:80/v4/word.json/'
-    event.preventDefault()
-    const uri = `${baseUri}${word}/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=${apiKey}`
-    const response = await fetch(uri)
-    const json = await response.json();
-
-    console.log('getting data:', json[0].word);
-    
-    this.setState({ data: json })
-    console.log('state:', this.state);
+  handleSearch = async (word, event) => {
+    const res = await define(word, event)
+    this.setState({ data: res[0].word }) 
   }
 
   render() {
@@ -36,6 +28,7 @@ class CreateWord extends React.Component {
     if (wordError) {
       errorList.push(wordError);
     }
+    console.log('data', data);
     
     return (
       <div>
@@ -43,13 +36,13 @@ class CreateWord extends React.Component {
             <input name="word" onChange={this.onChange} placeholder="Add a word..." value={word} />
           <button 
             className="btn"
-            onClick={(event) => this.define(word, event)}
+            onClick={(event) => this.handleSearch(word, event)}
             >
             Search
           </button>
         </form>
         {data &&
-          <div>{data[0].word}</div>
+          <div>{data}</div>
         }
         {errorList.length ?
           <ul>
