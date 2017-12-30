@@ -49,7 +49,7 @@ class CreateWord extends React.Component {
                 <li className="capalaize">{result.word}</li>
                 <li className="">{result.partOfSpeech}</li>
                 <li className="">{result.text}</li>
-                <li><button onClick={(event) => createWord(result.word, event)}>Save</button></li>
+                <li><button onClick={(event) => createWord(result.word, result.partOfSpeech, result.text, event)}>Save</button></li>
               </ul>
               <hr />
             </div>

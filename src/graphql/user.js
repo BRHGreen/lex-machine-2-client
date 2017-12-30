@@ -17,6 +17,8 @@ export const getUser = gql`
       email
       words {
         word
+        partOfSpeach
+        definition
         id
       }
       profile {

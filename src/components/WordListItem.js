@@ -7,8 +7,11 @@ const WordListItem = ({ getUser, deleteWord }) => {
         <div>
             {getUser.words && getUser.words.map((word, i) => {
                 return (
+                    console.log('word', word),
                     <li key={i}>
                         <p>{word.word}</p>
+                        <p>{word.partOfSpeach}</p>
+                        <p>{word.definition}</p>
                         <Link to={`/word/${word.id}`}>
                             <button>Edit</button>
                         </Link>
