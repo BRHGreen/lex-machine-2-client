@@ -1,31 +1,35 @@
+@import "variables.scss"; 
 body {
   padding: 4em 2em;
-  background: red; }
-
+  background: $color;
+}
 .capalaize {
-  text-transform: capitalize; }
-
+  text-transform: capitalize;
+}
 section {
   margin-top: 20px;
-  margin-bottom: 20px; }
-
+  margin-bottom: 20px;
+}
 .centered {
   display: flex;
   align-items: center;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 input {
   margin-bottom: .5em;
-  padding: 5px; }
+  padding: 5px;
+}
 
 input::-webkit-input-placeholder {
-  color: #adbdd6 !important; }
-
+color: #adbdd6 !important;
+}
 ul {
-  list-style: none; }
-
+  list-style: none;
+}
 li {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px; }
+  padding: 10px;
+}
