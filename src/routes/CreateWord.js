@@ -16,7 +16,7 @@ class CreateWord extends React.Component {
 
   handleSearch = async (word, event) => {
     const res = await define(word, event)
-    this.setState({ data: res[0].word }) 
+    this.setState({ data: res }) 
   }
 
   render() {
@@ -41,9 +41,21 @@ class CreateWord extends React.Component {
             Search
           </button>
         </form>
-        {data &&
-          <div>{data}</div>
+        <div>
+        {data && 
+          data.map((result, i) => (
+            <div key={i}>
+              <ul>
+                <li className="capalaize">{result.word}</li>
+                <li className="">{result.partOfSpeech}</li>
+                <li className="">{result.text}</li>
+              </ul>
+              <hr />
+            </div>
+            )
+          )
         }
+        </div>
         {errorList.length ?
           <ul>
             <li>There was some errors with your submission</li>
