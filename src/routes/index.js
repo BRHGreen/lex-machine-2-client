@@ -3,9 +3,9 @@ import decode from 'jwt-decode'
 import App from './App'
 import Register from './Register'
 import Login from './Login'
-import CreateWord from './CreateWord'
 import Word from './Word'
 import CreateProfile from './CreateProfile'
+import WordSearch from './WordSearch'
 
 import {
   BrowserRouter,
@@ -49,9 +49,9 @@ export default () =>(
       <Route path="/" exact component={App} />
       <Route path="/register" exact component={Register} />
       <Route path="/login" exact component={Login} />
-      <PrivateRoute path="/create-word" exact component={CreateWord} />
       <PrivateRoute path="/create-profile" exact component={CreateProfile} />
       <Route path="/word/:id" exact component={Word} />
+      <Route path="/word-search" exact component={WordSearch} />
     </Switch>
   </BrowserRouter>
 )

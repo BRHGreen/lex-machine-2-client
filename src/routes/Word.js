@@ -12,15 +12,12 @@ class Word extends React.Component {
     }
     handleIsEditing () {
         this.setState({ isEditing: !this.state.isEditing })
-        console.log('this.state:', this.state)
     }
     onChange = (e) => {
         this.setState({ newWord: e.target.value })
     }
 
     updateWord = async (word, newWord, event) => {
-        console.log('word', word)
-        console.log('newWord', newWord)
         // const newWord = this.state.newWord
         event.preventDefault()
         const response = await this.props.updateWord({
@@ -29,7 +26,6 @@ class Word extends React.Component {
                 query: getUser
             }]
         });
-        console.log('response', response)
         this.props.history.push('/');
     };
 
@@ -61,7 +57,3 @@ const WordWithMutations = compose(
 )(Word)
 
 export default WordWithMutations
-
-// export default graphql(getWord, {
-//     options: (props) => { return { variables: { id: props.match.params.id } } }
-// })(Word)

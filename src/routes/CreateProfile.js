@@ -16,7 +16,6 @@ class CreateProfile extends React.Component {
       variables: { age, occupation },
     });
 
-    console.log('res: ', response);
 
     const {
       ok, errors,
@@ -35,7 +34,6 @@ class CreateProfile extends React.Component {
   };
 
   onChange = (e) => {
-    console.log('onChange:', e.target.value);
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };

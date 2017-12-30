@@ -38,8 +38,6 @@ class Register extends React.Component {
 
       this.setState(err);
     }
-
-    console.log('regist res:', response);
   };
 
   onChange = (e) => {

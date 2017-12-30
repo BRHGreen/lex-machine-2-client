@@ -6,7 +6,8 @@ import { deleteWord } from '../graphql/word'
 import { graphql, compose } from 'react-apollo'
 import '../styles/app.css'
 import { createWord } from '../graphql/word'
-import { Define } from '../components/Wordnik'
+import { define } from '../components/Wordnik'
+
 
 class Dashboard extends React.Component {
   deleteWord = async (word) => {
@@ -18,8 +19,6 @@ class Dashboard extends React.Component {
     })
   }
   createWord = async (word, event) => {
-    console.log('word', word)
-    console.log('event', event)
     event.preventDefault()
     const response = await this.props.createWord({
       variables: { word },
@@ -27,7 +26,6 @@ class Dashboard extends React.Component {
         query: getUser
       }]
     });
-    console.log('response', response)
     const {
       ok, errors,
     } = response.data.createWord;
@@ -47,14 +45,16 @@ class Dashboard extends React.Component {
   refreshWordList  
   render () {
     const { getUser } = this.props.data
-    console.log('props:', this.props)
     return (
       <div>
       {getUser &&
         <div>
           <h1>Hi <span className="capalaize">{getUser.username}</span></h1>
           <div>
-            <CreateWord createWord={this.createWord}/>
+            <CreateWord 
+            createWord={this.createWord}
+            define={define}
+            />
           </div>
           <div>
             <h3>Your Words:</h3>
