@@ -1,0 +1,30 @@
+@import "variables.scss"; 
+body {
+  padding: 4em 2em;
+}
+
+.btn {
+    margin: 5px;
+}
+.centered {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: .5em;
+  padding: 5px;
+}
+
+input::-webkit-input-placeholder {
+color: #adbdd6 !important;
+}
+ul {
+  list-style: none;
+}
+li {
+    list-style: none;
+}
+
+

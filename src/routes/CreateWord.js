@@ -28,7 +28,6 @@ class CreateWord extends React.Component {
     if (wordError) {
       errorList.push(wordError);
     }
-    console.log('data', data);
     
     return (
       <div>

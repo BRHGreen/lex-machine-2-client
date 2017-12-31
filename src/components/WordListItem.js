@@ -7,16 +7,18 @@ const WordListItem = ({ getUser, deleteWord }) => {
         <div>
             {getUser.words && getUser.words.map((word, i) => {
                 return (
-                    console.log('word', word),
-                    <li key={i}>
-                        <p>{word.word}</p>
-                        <p>{word.partOfSpeach}</p>
-                        <p>{word.definition}</p>
-                        <Link to={`/word/${word.id}`}>
-                            <button>Edit</button>
-                        </Link>
-                        <button onClick={() => deleteWord(word.word)}>Delete</button>
-                    </li>
+                    <ul className="word-list" key={i}>
+                        <li><hr/></li>
+                        <li className="capalaize"><h4>{word.word}</h4></li>
+                        <li><i>{word.partOfSpeach}</i></li>
+                        <li><b>Definition:</b><br/>{word.definition}</li>
+                        <li className="word-list--buttons">
+                            <Link to={`/word/${word.id}`}>
+                                <button className="btn btn-primary">Edit</button>
+                            </Link>
+                            <button className="btn" onClick={() => deleteWord(word.word)}>Delete</button>
+                        </li>
+                    </ul>
                 )
             })}
         </div>

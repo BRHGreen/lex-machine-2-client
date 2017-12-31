@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
     })
   }
   createWord = async(word, partOfSpeach, definition, event) => {
-    console.log('definition', definition);
     
     event.preventDefault()
     const response = await this.props.createWord({

@@ -1,35 +1,3 @@
-@import "variables.scss"; 
-body {
-  padding: 4em 2em;
-  background: $color;
-}
-.capalaize {
-  text-transform: capitalize;
-}
-section {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.centered {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-input {
-  margin-bottom: .5em;
-  padding: 5px;
-}
-
-input::-webkit-input-placeholder {
-color: #adbdd6 !important;
-}
-ul {
-  list-style: none;
-}
-li {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px;
-}
+@import "global.scss"; 
+@import "helpers.scss"; 
+@import "word.scss"; 

@@ -21,10 +21,3 @@ ul {
 
 li {
   list-style: none; }
-
-.capalaize {
-  text-transform: capitalize; }
-
-.word-list--buttons {
-  display: flex;
-  flex-direction: row; }
