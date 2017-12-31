@@ -4,6 +4,8 @@ export const getWord = gql`
   query($id: Int!) {
     getWord(id: $id) {
       word
+      partOfSpeach
+      definition
     }
   }
 `;

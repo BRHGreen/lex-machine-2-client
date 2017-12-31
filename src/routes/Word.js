@@ -1,12 +1,11 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { getWord } from '../graphql/word'
-import { updateWord } from '../graphql/word'
+import { updateWord, deleteWord } from '../graphql/word'
 import { getUser } from '../graphql/user'
 
 class Word extends React.Component {
     state = {
-        isEditing: false,
         newWord: '',
         errors: {},
     }
@@ -25,23 +24,41 @@ class Word extends React.Component {
             refetchQueries: [{
                 query: getUser
             }]
-        });
+        })
         this.props.history.push('/');
     };
 
+    deleteWord = async (word) => {
+        const response = await this.props.deleteWord({
+            variables: { word },
+            refetchQueries: [{
+                query: getUser
+            }]
+        })
+        this.props.history.push('/');
+    }
+
     render () {
         const { getWord } = this.props.data
-        const { word, newWord } = this.state.newWord
+        const { word, newWord } = this.state
+        console.log('word:', this.props);
+        
         return (
             <div onClick={() => this.handleIsEditing()}>
             {getWord &&
-                <input
-                    placeholder={getWord.word}
-                    value={word}
-                    onChange={this.onChange}
-                />
+                    <ul className="word-page">
+                        <li className="capalaize">
+                            <h4>{getWord.word}</h4>
+                        </li>
+                    <li><i>{getWord.partOfSpeach}</i></li>
+                    <li><b>Definition:</b><br />{getWord.definition}</li>
+                        <li className="word-list--buttons">
+                        <button 
+                            className="btn btn-primary" onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
+                            <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
+                        </li>
+                    </ul>
             }
-                <button className="btn" onClick={(event) => this.updateWord(getWord.word, this.state.newWord, event)}>Save</button>
             </div>
         )
     }
@@ -50,6 +67,9 @@ class Word extends React.Component {
 const WordWithMutations = compose(
     graphql(updateWord, {
         name: 'updateWord'
+    }),
+    graphql(deleteWord, {
+        name: 'deleteWord'
     }),
     graphql(getWord, {
         options: (props) => { return { variables: { id: props.match.params.id } } }
