@@ -40,22 +40,25 @@ class Word extends React.Component {
 
     render () {
         const { getWord } = this.props.data
-        const { word, newWord } = this.state
+        const { word, newWord, isEditing } = this.state
         console.log('word:', this.props);
         
         return (
-            <div onClick={() => this.handleIsEditing()}>
+            <div>
             {getWord &&
-                    <ul className="word-page">
-                        <li className="capalaize">
+                    <ul className="word__page">
+                    <li className="capalaize" onClick={() => this.handleIsEditing()}>
                             <h4>{getWord.word}</h4>
+                        <button className="btn btn__edit-icon">
+                            <i className="icon icon-edit" />
+                            </button>
                         </li>
                     <li><i>{getWord.partOfSpeach}</i></li>
                     <li><b>Definition:</b><br />{getWord.definition}</li>
                         <li className="word-list--buttons">
                         <button 
-                            className="btn btn-primary" onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
-                            <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
+                            className={`btn btn-primary ${isEditing ? '' : 'disabled'}`} onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
+                        <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
                         </li>
                     </ul>
             }

@@ -6,7 +6,7 @@ const WordListItem = ({ getUser, deleteWord }) => (
     <div>
         {getUser.words && getUser.words.map((word, i) => {
             return (
-                <ul className="word-list" key={i}>
+                <ul className="word__list" key={i}>
                     <li><hr/></li>
                     <li
                         className="capalaize"
@@ -17,7 +17,7 @@ const WordListItem = ({ getUser, deleteWord }) => (
                     </li>
                     <li><i>{word.partOfSpeach}</i></li>
                     <li><b>Definition:</b><br/>{word.definition}</li>
-                    <li className="word-list--buttons">
+                    <li className="word__list--buttons">
                         <Link to={`/word/${word.id}`}>
                             <button className="btn btn-primary">Edit</button>
                         </Link>
