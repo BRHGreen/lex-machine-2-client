@@ -18,10 +18,10 @@ class Word extends React.Component {
         this.setState({ newWord: e.target.value })
     }
 
-    updateWord = async (word, newWord, event) => {
+    updateWord = async (id, newWord, event) => {
         event.preventDefault()
         const response = await this.props.updateWord({
-            variables: { word, newWord },
+            variables: { id, newWord },
             refetchQueries: [{
                 query: getUser
             }]
@@ -105,7 +105,7 @@ class Word extends React.Component {
                         </li>
                     <li className="word-list--buttons">
                                 <button
-                                    className="btn btn-primary" onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
+                                    className="btn btn-primary" onClick={(event) => this.updateWord(getWord.id, newWord, event)}>Save</button>
                         <button className="btn" onClick={() => this.handleIsEditing(false)}>Cancel</button>
                     </li>
                     </ul>
