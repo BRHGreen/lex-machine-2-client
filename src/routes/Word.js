@@ -19,7 +19,6 @@ class Word extends React.Component {
     }
 
     updateWord = async (word, newWord, event) => {
-        // const newWord = this.state.newWord
         event.preventDefault()
         const response = await this.props.updateWord({
             variables: { word, newWord },
@@ -57,19 +56,15 @@ class Word extends React.Component {
                     ? <div>
                     {getWord &&
                     <ul className="word__page">
-                    <li className="capalaize" onClick={() => this.handleIsEditing(true)}>
+                    <li className="capalaize">
                             <div>
                                 <h4>{getWord.word}</h4>
-                                <button className="btn btn__edit-icon">
-                                    <i className="icon icon-edit" />
-                                </button>
                             </div>
                         </li>
                     <li><i>{getWord.partOfSpeach}</i></li>
                     <li><b>Definition:</b><br />{getWord.definition}</li>
                         <li className="word-list--buttons">
-                        <button 
-                            className={`btn btn-primary ${isEditing ? '' : 'disabled'}`} onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
+                                <button className="btn btn-primary" onClick={() => this.handleIsEditing(true)}>Edit</button>
                         <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
                         </li>
                     </ul>
@@ -109,9 +104,9 @@ class Word extends React.Component {
                             </div>
                         </li>
                     <li className="word-list--buttons">
-                        <button 
-                            className={`btn btn-primary ${isEditing ? '' : 'disabled'}`} onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
-                        <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
+                                <button
+                                    className="btn btn-primary" onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
+                        <button className="btn" onClick={() => this.handleIsEditing(false)}>Cancel</button>
                     </li>
                     </ul>
                     }

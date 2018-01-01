@@ -6,6 +6,7 @@ export const getWord = gql`
       word
       partOfSpeach
       definition
+      id
     }
   }
 `;
