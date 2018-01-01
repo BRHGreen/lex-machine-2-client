@@ -23,8 +23,8 @@ export const createWord = gql`
   }
 `
 export const updateWord = gql`
-  mutation($id: Int!, $newWord: String!) {
-    updateWord(id: $id, newWord: $newWord)
+  mutation($id: Int!, $newWord: String, $newPartOfSpeach: String, $newDefinition: String) {
+    updateWord(id: $id, newWord: $newWord, newPartOfSpeach: $newPartOfSpeach, newDefinition: $newDefinition)
   }
 `
 export const deleteWord = gql`

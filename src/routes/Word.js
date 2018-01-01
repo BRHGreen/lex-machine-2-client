@@ -15,13 +15,17 @@ class Word extends React.Component {
         this.setState({ isEditing: state })
     }
     onChange = (e) => {
-        this.setState({ newWord: e.target.value })
+        console.log('e', e)
+        const { name, value } = e.target
+        this.setState({ [name]: value })
+        console.log('state:', this.state);
+        
     }
 
-    updateWord = async (id, newWord, event) => {
+    updateWord = async (id, newWord, newPartOfSpeach, newDefinition, event) => {
         event.preventDefault()
         const response = await this.props.updateWord({
-            variables: { id, newWord },
+            variables: { id, newWord, newPartOfSpeach, newDefinition },
             refetchQueries: [{
                 query: getUser
             }]
@@ -77,9 +81,10 @@ class Word extends React.Component {
                             <div>
                                 <label>Word:</label>
                                     <input
-                                    placeholder={getWord.word}
-                                    value={newWord}
-                                    onChange={this.onChange}
+                                        name="newWord"
+                                        placeholder={getWord.word}
+                                        value={newWord}
+                                        onChange={this.onChange}
                                     />
                                 </div>
                         </li>
@@ -87,6 +92,7 @@ class Word extends React.Component {
                                 <div>
                                     <label>Part of speach:</label>
                                     <input
+                                        name="newPartOfSpeach"
                                         placeholder={getWord.partOfSpeach}
                                         value={newPartOfSpeach}
                                         onChange={this.onChange}
@@ -97,6 +103,7 @@ class Word extends React.Component {
                             <div>
                                 <label>Definition:</label>
                                 <textarea
+                                    name="newDefinition"
                                     placeholder={getWord.definition}
                                     value={newDefinition}
                                     onChange={this.onChange}
@@ -105,7 +112,11 @@ class Word extends React.Component {
                         </li>
                     <li className="word-list--buttons">
                                 <button
-                                    className="btn btn-primary" onClick={(event) => this.updateWord(getWord.id, newWord, event)}>Save</button>
+                                    className="btn btn-primary"
+                                    onClick={(event) => this.updateWord(getWord.id, newWord, newPartOfSpeach, newDefinition, event)}
+                                >
+                                    Save
+                                </button>
                         <button className="btn" onClick={() => this.handleIsEditing(false)}>Cancel</button>
                     </li>
                     </ul>
