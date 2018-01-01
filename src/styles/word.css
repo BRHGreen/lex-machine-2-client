@@ -5,6 +5,10 @@
 .word__page li button {
   margin-top: 0; }
 
+.word__page--edit li div > label {
+  margin-right: 5px;
+  display: inherit; }
+
 .word__list--buttons {
   display: flex;
   flex-direction: row; }

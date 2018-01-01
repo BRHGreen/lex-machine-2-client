@@ -7,10 +7,12 @@ import { getUser } from '../graphql/user'
 class Word extends React.Component {
     state = {
         newWord: '',
+        newPartOfSpeach: '',
+        newDefinition: '',
         errors: {},
     }
-    handleIsEditing () {
-        this.setState({ isEditing: !this.state.isEditing })
+    handleIsEditing (state) {
+        this.setState({ isEditing: state })
     }
     onChange = (e) => {
         this.setState({ newWord: e.target.value })
@@ -40,18 +42,28 @@ class Word extends React.Component {
 
     render () {
         const { getWord } = this.props.data
-        const { word, newWord, isEditing } = this.state
+        const { 
+            word,
+            newWord,
+            newPartOfSpeach,
+            newDefinition,
+            isEditing,
+         } = this.state
         console.log('word:', this.props);
         
         return (
             <div>
-            {getWord &&
+            {!isEditing
+                    ? <div>
+                    {getWord &&
                     <ul className="word__page">
-                    <li className="capalaize" onClick={() => this.handleIsEditing()}>
-                            <h4>{getWord.word}</h4>
-                        <button className="btn btn__edit-icon">
-                            <i className="icon icon-edit" />
-                            </button>
+                    <li className="capalaize" onClick={() => this.handleIsEditing(true)}>
+                            <div>
+                                <h4>{getWord.word}</h4>
+                                <button className="btn btn__edit-icon">
+                                    <i className="icon icon-edit" />
+                                </button>
+                            </div>
                         </li>
                     <li><i>{getWord.partOfSpeach}</i></li>
                     <li><b>Definition:</b><br />{getWord.definition}</li>
@@ -61,6 +73,49 @@ class Word extends React.Component {
                         <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
                         </li>
                     </ul>
+                    }
+                    </div>
+                    : <div>
+                    {getWord &&
+                    <ul className="word__page--edit">
+                        <li className="capalaize" onClick={() => this.handleIsEditing(true)}>
+                            <div>
+                                <label>Word:</label>
+                                    <input
+                                    placeholder={getWord.word}
+                                    value={newWord}
+                                    onChange={this.onChange}
+                                    />
+                                </div>
+                        </li>
+                        <li>
+                                <div>
+                                    <label>Part of speach:</label>
+                                    <input
+                                        placeholder={getWord.partOfSpeach}
+                                        value={newPartOfSpeach}
+                                        onChange={this.onChange}
+                                    />
+                                </div>
+                        </li>
+                        <li>
+                            <div>
+                                <label>Definition:</label>
+                                <textarea
+                                    placeholder={getWord.definition}
+                                    value={newDefinition}
+                                    onChange={this.onChange}
+                                />
+                            </div>
+                        </li>
+                    <li className="word-list--buttons">
+                        <button 
+                            className={`btn btn-primary ${isEditing ? '' : 'disabled'}`} onClick={(event) => this.updateWord(getWord.word, newWord, event)}>Save</button>
+                        <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
+                    </li>
+                    </ul>
+                    }
+                    </div> 
             }
             </div>
         )

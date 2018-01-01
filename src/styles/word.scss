@@ -9,6 +9,16 @@
                 margin-top: 0;
             }
         }
+        &--edit {
+            li {
+                div > {
+                    label {
+                        margin-right: 5px;
+                        display: inherit;
+                    }
+                }
+            }
+            }
     }
     &__list {
         &--buttons {
