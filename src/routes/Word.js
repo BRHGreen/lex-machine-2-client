@@ -15,22 +15,23 @@ class Word extends React.Component {
         this.setState({ isEditing: state })
     }
     onChange = (e) => {
-        console.log('e', e)
         const { name, value } = e.target
         this.setState({ [name]: value })
-        console.log('state:', this.state);
         
     }
 
-    updateWord = async (id, newWord, newPartOfSpeach, newDefinition, event) => {
+    updateWord = async (id, event) => {
+        const { newWord, newPartOfSpeach, newDefinition } = this.state
         event.preventDefault()
-        const response = await this.props.updateWord({
-            variables: { id, newWord, newPartOfSpeach, newDefinition },
-            refetchQueries: [{
-                query: getUser
-            }]
-        })
-        this.props.history.push('/');
+            const response = await this.props.updateWord({
+                variables: { id, newWord, newPartOfSpeach, newDefinition },
+                // refetchQueries: [{
+                //     query: getUser
+                // }]
+            })
+        // this.props.history.push('/');
+        this.setState({ isEditing: false })
+        
     };
 
     deleteWord = async (word) => {
@@ -52,7 +53,6 @@ class Word extends React.Component {
             newDefinition,
             isEditing,
          } = this.state
-        console.log('word:', this.props);
         
         return (
             <div>
@@ -68,7 +68,7 @@ class Word extends React.Component {
                     <li><i>{getWord.partOfSpeach}</i></li>
                     <li><b>Definition:</b><br />{getWord.definition}</li>
                         <li className="word-list--buttons">
-                                <button className="btn btn-primary" onClick={() => this.handleIsEditing(true)}>Edit</button>
+                            <button className="btn btn-primary" onClick={() => this.handleIsEditing(true)}>Edit</button>
                         <button className="btn" onClick={() => this.deleteWord(getWord.word)}>Delete</button>
                         </li>
                     </ul>
@@ -112,8 +112,8 @@ class Word extends React.Component {
                         </li>
                     <li className="word-list--buttons">
                                 <button
-                                    className="btn btn-primary"
-                                    onClick={(event) => this.updateWord(getWord.id, newWord, newPartOfSpeach, newDefinition, event)}
+                                    className={`btn btn-primary ${newWord && newWord !== getWord.word  ? '' : 'disabled' }`}
+                                    onClick={(event) => this.updateWord(getWord.id, event)}
                                 >
                                     Save
                                 </button>
@@ -130,7 +130,18 @@ class Word extends React.Component {
 
 const WordWithMutations = compose(
     graphql(updateWord, {
-        name: 'updateWord'
+        props: ({ mutate }) => ({
+            updateWord: ({ variables }) =>
+            mutate({
+                variables,
+                updateQueries: {
+                    getUser: (prev, { variables }) => {
+                        console.log('prev', prev);
+                            
+                    }
+                }
+            })
+        })
     }),
     graphql(deleteWord, {
         name: 'deleteWord'
