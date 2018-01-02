@@ -25,13 +25,11 @@ class Word extends React.Component {
         event.preventDefault()
             const response = await this.props.updateWord({
                 variables: { id, newWord, newPartOfSpeach, newDefinition },
-                // refetchQueries: [{
-                //     query: getUser
-                // }]
+                refetchQueries: [{
+                    query: getUser
+                }]
             })
-        // this.props.history.push('/');
-        this.setState({ isEditing: false })
-        
+        this.props.history.push('/');
     };
 
     deleteWord = async (word) => {
@@ -130,18 +128,7 @@ class Word extends React.Component {
 
 const WordWithMutations = compose(
     graphql(updateWord, {
-        props: ({ mutate }) => ({
-            updateWord: ({ variables }) =>
-            mutate({
-                variables,
-                updateQueries: {
-                    getUser: (prev, { variables }) => {
-                        console.log('prev', prev);
-                            
-                    }
-                }
-            })
-        })
+        name: 'updateWord'
     }),
     graphql(deleteWord, {
         name: 'deleteWord'
