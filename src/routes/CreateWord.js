@@ -19,6 +19,12 @@ class CreateWord extends React.Component {
     this.setState({ data: res }) 
   }
 
+  handleCreateWord = async (word, partOfSpeech, definition, event) => {
+    const res = await this.props.createWord(word, partOfSpeech, definition, event)
+    console.log('res', res);
+    
+  }
+
   render() {
     const { word, wordError, data } = this.state;
     const { createWord, define } = this.props;
@@ -48,7 +54,20 @@ class CreateWord extends React.Component {
                 <li className="capalaize">{result.word}</li>
                 <li className="">{result.partOfSpeech}</li>
                 <li className="">{result.text}</li>
-                <li><button onClick={(event) => createWord(result.word, result.partOfSpeech, result.text, event)}>Save</button></li>
+                <li>
+                  <button
+                    className="btn"
+                    onClick={(event) => createWord(result.word, result.partOfSpeech, result.text, event)}
+                    >
+                    Save
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    // onClick={}>
+                    >
+                    Add to Word
+                  </button>
+                </li>
               </ul>
               <hr />
             </div>

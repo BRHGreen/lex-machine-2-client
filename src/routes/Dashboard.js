@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
     } = response.data.createWord;
     
     if (ok) {
-      return
+      return 
     } else {
       const err = {};
       errors.forEach(({ path, message }) => {
@@ -43,7 +43,6 @@ class Dashboard extends React.Component {
     }
   };
 
-  refreshWordList  
   render () {
     const { getUser } = this.props.data
     return (
@@ -52,9 +51,9 @@ class Dashboard extends React.Component {
         <div>
           <h1>Hi <span className="capalaize">{getUser.username}</span></h1>
           <div>
-            <CreateWord 
-            createWord={this.createWord}
-            define={define}
+            <CreateWord
+              createWord={this.createWord}
+              define={define}
             />
           </div>
           <div>
